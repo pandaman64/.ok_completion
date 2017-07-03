@@ -5,17 +5,17 @@ contains() {
     return 1
 }
 
-_okpy()
+_ok()
 {
     local cure prev
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
     COMPREPLY=()
 
-    if contains ok "${COMP_WORDS[@]}" 
+    if contains ok "${COMP_WORDS[@]}"
     then
         case "${prev}" in
-            "-q" | "--question" ) 
+            "-q" | "--question" )
                 if tests="$(python3 ok --tests 2>&1)"
                 then
                     tests=( "$(echo "${tests}" | sed -nr 's/    (.*)/\1/p' | tr '\n' ' ')" )
@@ -25,4 +25,4 @@ _okpy()
         esac
     fi
 }
-complete -F _okpy python python3
+complete -F _ok python python3
