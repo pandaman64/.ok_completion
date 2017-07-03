@@ -1,0 +1,28 @@
+# https://stackoverflow.com/posts/8574392/revisions
+contains() {
+    local e
+    for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+    return 1
+}
+
+_okpy()
+{
+    local cure prev
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    COMPREPLY=()
+
+    if contains ok "${COMP_WORDS[@]}" 
+    then
+        case "${prev}" in
+            "-q" | "--question" ) 
+                if tests="$(python3 ok --tests 2>&1)"
+                then
+                    tests=( "$(echo "${tests}" | sed -nr 's/    (.*)/\1/p' | tr '\n' ' ')" )
+                    COMPREPLY=( $(compgen -W "${tests}" -- ${cur}) )
+                fi
+                ;;
+        esac
+    fi
+}
+complete -F _okpy python python3
