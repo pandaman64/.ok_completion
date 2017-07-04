@@ -16,7 +16,7 @@ _ok()
     then
         case "${prev}" in
             "-q" | "--question" )
-                if tests="$(python3 ok --tests 2>&1)"
+                if tests="$(python3 ok --tests --local 2>&1)"
                 then
                     tests=( "$(echo "${tests}" | sed -nr 's/    (.*)/\1/p' | tr '\n' ' ')" )
                     COMPREPLY=( $(compgen -W "${tests}" -- ${cur}) )
