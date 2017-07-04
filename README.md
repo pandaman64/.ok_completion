@@ -10,7 +10,13 @@ This repo provides bash completion for [the ok client](https://github.com/Cal-CS
 . /path/to/repo/ok_completion
 ```
 
-2-B. Or, copy `ok_completion` into `/etc/bash_completion.d/`.
+2-B. Or, make a link to `ok_completion` in `/etc/bash_completion.d/`.
+The command should be like this:
+```
+$ ln /path/to/repo/ok_completion /etc/bash_completion.d
+```
+
+3. Restart your terminal.
 
 # Usage
 In your lab directory, type `python3 ok -q` and press [TAB] twice.
