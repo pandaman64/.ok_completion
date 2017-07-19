@@ -25,4 +25,4 @@ _ok()
         esac
     fi
 }
-complete -F _ok python python3
+complete -o default -o bashdefault -F _ok python python3
